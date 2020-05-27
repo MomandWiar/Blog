@@ -7,8 +7,8 @@ class PagesController extends Controller
 {
     public function getHome()
     {
-        $names = App::get('database')->selectAll('users');
-        $this->view('home', compact('names'));
+        $posts = App::get('database')->selectAll('posts');
+        $this->view('home', compact('posts'));
     }
 
     public function getAbout()
@@ -19,5 +19,10 @@ class PagesController extends Controller
     public function getContact()
     {
         $this->view('contact');
+    }
+
+    public function getLogin()
+    {
+        $this->view('login');
     }
 }

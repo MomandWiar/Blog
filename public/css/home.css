@@ -1,0 +1,72 @@
+h1 {
+    margin-bottom: 0;
+    font-size: 50px;
+}
+
+h4 {
+    font-size: 25px;
+    margin-top: 0;
+    font-weight: lighter;
+}
+
+.blog {
+    margin: 50px 0;
+    font-size: 20px;
+}
+
+#number {
+    width: 5%;
+}
+
+#title {
+    width: 20%;
+}
+
+#description {
+    width: 55%;
+}
+
+#date {
+    width: 15%;
+    text-align: center;
+}
+
+#info {
+    width: 5%;
+    color: #06c;
+    text-align: right;
+    font-weight: bold;
+}
+
+#info:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.blog ul {
+    display: flex;
+    padding: 0;
+}
+
+.blog ul li {
+    list-style: none;
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pages {
+    display: flex;
+    font-size: 20px;
+}
+
+.pages p {
+    margin: 0 10px;
+}
+
+.pages-nav {
+    width: 255px;
+    display: flex;
+    margin: auto;
+}
