@@ -52,6 +52,10 @@
     margin: auto;
 }
 
+.pagination-options p {
+    text-decoration: underline;
+}
+
 .pagination-options a, .pagination-options p {
     margin: 0 10px;
 }

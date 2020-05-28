@@ -9,8 +9,13 @@ namespace Wiar\Controllers;
  */
 class Controller
 {
+    public function __construct()
+    {
+        session_start();
+    }
+
     /**
-     * views the name.view.php file by name
+     * views the view.php by name
      *
      * @param String $name
      * @return void
@@ -28,6 +33,7 @@ class Controller
      */
     public function redirect($path)
     {
-        header("Location:{$path}");
+        header("Location: {$path}");
+        exit();
     }
 }

@@ -2,17 +2,18 @@
 <?php include 'partials/navbar.php'; ?>
 
     <div class="header-title">
-        <h1>Login</h1>
-        <h4>And let the magic do it's job!</h4>
+        <h1>Register</h1>
+        <h4>Be part of our Team!</h4>
     </div>
 
-    <form action="/login-user" METHOD="POST">
+    <form action="/register-user" METHOD="POST">
         <input autocomplete="off" type="text" placeholder="Username" name="username">
         <input autocomplete="off" type="password" placeholder="Password" name="password">
+        <input autocomplete="off" type="password" placeholder="Password Retry" name="passwordRetry">
         <div class="options">
-            <button class='special' type="submit">Login</button>
+            <button class="special" type="submit">Sign Up</button>
             <p> - </p>
-            <a href="/register">register</a>
+            <a href="/login">back</a>
         </div>
     </form>
 

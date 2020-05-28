@@ -7,7 +7,7 @@ class PagesController extends Controller
 {
     public function getHome()
     {
-        $posts = App::get('database')->selectAll('posts');
+        $posts = array_reverse(App::get('database')->selectAll('posts'));
         $css = 'home';
         $this->view('home', compact('posts', 'css'));
     }
@@ -20,13 +20,18 @@ class PagesController extends Controller
 
     public function getContact()
     {
-        $css = 'contact';
-        $this->view('contact');
+        $css = 'form';
+        $this->view('contact', compact('css'));
     }
 
     public function getLogin()
     {
-        $css = 'login';
+        $css = 'form';
         $this->view('login', compact('css'));
+    }
+
+    public function getRegister() {
+        $css = 'form';
+        $this->view('register', compact('css'));
     }
 }

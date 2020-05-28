@@ -1,10 +1,16 @@
 <?php include 'partials/head.php'; ?>
-<?php include 'partials/header.php'; ?>
+<?php include 'partials/navbar.php'; ?>
 
     <div class="header-title">
         <h1>Welcome to our Blog</h1>
         <h4>Search around for a interesting item!</h4>
     </div>
+
+<?php
+    if (isset($_SESSION['success'])) {
+        echo "<h1>{$_SESSION['success']}</h1>";
+    }
+?>
 
     <section class="blog">
         <?php foreach ($data['posts'] as $post) : ?>

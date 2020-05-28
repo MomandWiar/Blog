@@ -1,7 +1,7 @@
 <?php
 
 namespace Wiar\Core;
-
+use Exception;
 /**
  * Class Router
  *

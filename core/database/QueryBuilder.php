@@ -35,6 +35,20 @@ class QueryBuilder
     }
 
     /**
+     * selects all data from table_name
+     * with where statement
+     *
+     * @param String $table
+     * @return array with all data from table_name
+     */
+    public function selectWhere($table, $where)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM {$table} WHERE {$where}");
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_CLASS);
+    }
+
+    /**
      * insert into database by passing
      * table_name and parameters
      *

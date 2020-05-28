@@ -1,13 +1,9 @@
 <?php include 'partials/head.php'; ?>
-<?php include 'partials/header.php'; ?>
+<?php include 'partials/navbar.php'; ?>
 
-<h1>Contact</h1>
-
-<h3>Submit Your Name</h3>
-
-<form method="POST" action="/names">
-    <input name="name">
-    <button>Click Me!</button>
-</form>
+    <div class="header-title">
+        <h1>Contact</h1>
+        <h4>Send us something!</h4>
+    </div>
 
 <?php include 'partials/footer.php'; ?>
