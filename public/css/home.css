@@ -1,45 +1,31 @@
-h1 {
-    margin-bottom: 0;
-    font-size: 50px;
-}
-
-h4 {
-    font-size: 25px;
-    margin-top: 0;
-    font-weight: lighter;
-}
-
 .blog {
-    margin: 50px 0;
     font-size: 20px;
 }
 
-#number {
+.number {
     width: 5%;
 }
 
-#title {
+.title {
     width: 20%;
 }
 
-#description {
+.description {
     width: 55%;
 }
 
-#date {
+.date {
     width: 15%;
     text-align: center;
 }
 
-#info {
+.info {
     width: 5%;
-    color: #06c;
     text-align: right;
     font-weight: bold;
 }
 
-#info:hover {
-    text-decoration: underline;
+.info:hover {
     cursor: pointer;
 }
 
@@ -50,7 +36,6 @@ h4 {
 
 .blog ul li {
     list-style: none;
-    width: 250px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
