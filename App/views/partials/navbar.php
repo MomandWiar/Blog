@@ -7,7 +7,7 @@
             <?php if(!isset($_SESSION['status'])) : ?>
                 <li><a href="/login" class='<?= $_SERVER['REQUEST_URI'] == '/login' ? 'active' : '' ?> special'>Login</a></li>
             <?php else : ?>
-                <li><a href="/posts" class='<?= $_SERVER['REQUEST_URI'] == '/login' ? 'active' : '' ?>'>Posts</a></li>
+                <li><a href="/posts" class='<?= substr($_SERVER['REQUEST_URI'],0, 6) == '/posts' ? 'active' : '' ?>'>Posts</a></li>
                 <li><a href='/logout-user' class='special'>Logout</a></li>
             <?php endif; ?>
         </ul>

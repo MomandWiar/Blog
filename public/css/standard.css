@@ -25,6 +25,10 @@ a:hover {
     font-weight: bold;
 }
 
+.highlight {
+    color: #06c;
+}
+
 header {
     margin-bottom: 50px;
 }

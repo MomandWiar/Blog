@@ -22,6 +22,19 @@ class QueryBuilder
     }
 
     /**
+     * selects whatever user passes
+     *
+     * @param String $table
+     * @return array with all data from table_name
+     */
+    public function createQuery($query)
+    {
+        $statement = $this->pdo->prepare($query);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_CLASS);
+    }
+
+    /**
      * selects all data from table_name
      *
      * @param String $table
@@ -41,7 +54,7 @@ class QueryBuilder
      * @param String $table
      * @return array with all data from table_name
      */
-    public function selectWhere($table, $where)
+    public function selectAllWhere($table, $where)
     {
         $symbol = ' = ';
         $sql = sprintf(
