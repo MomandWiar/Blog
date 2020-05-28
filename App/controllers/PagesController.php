@@ -24,6 +24,18 @@ class PagesController extends Controller
         $this->view('contact', compact('css'));
     }
 
+    public function getPosts()
+    {
+        $posts = App::get('database')->selectWhere(
+            'posts',
+            [
+                'userId' => $_SESSION['attributes'][0]->id,
+            ]
+        );
+        $css = 'home';
+        $this->view('posts', compact('posts', 'css'));
+    }
+
     public function getLogin()
     {
         $css = 'form';

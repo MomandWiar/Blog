@@ -43,9 +43,27 @@ class QueryBuilder
      */
     public function selectWhere($table, $where)
     {
-        $statement = $this->pdo->prepare("SELECT * FROM {$table} WHERE {$where}");
-        $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_CLASS);
+        $symbol = ' = ';
+        $sql = sprintf(
+            "SELECT * FROM %s WHERE %s",
+            $table,
+            implode(' AND ', array_map(
+                    function($k, $v) use($symbol) {
+                        return $k . $symbol . "'" . $v . "'";
+                    },
+                    array_keys($where),
+                    array_values($where)
+                )
+            )
+        );
+
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute($where);
+            return $statement->fetchAll(PDO::FETCH_CLASS);
+        } catch (Exception $e) {
+            die('Woops, Something went wrong<br>');
+        }
     }
 
     /**

@@ -9,11 +9,15 @@ class UserController extends Controller
     {
         $check = App::get('database')->selectWhere(
             'users',
-            "username = '{$_POST['username']}' AND password = '{$_POST['password']}'"
+            [
+                'username' => $_POST['username'],
+                'password' => $_POST['password']
+            ]
         );
 
         if ($check == true) {
             $_SESSION['status'] = 1;
+            $_SESSION['attributes'] = $check;
             $this->redirect('/');
         }
         $this->redirect('/login');

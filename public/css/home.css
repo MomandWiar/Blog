@@ -28,6 +28,10 @@
     cursor: pointer;
 }
 
+.blog {
+    margin-top: 50px;
+}
+
 .blog ul {
     display: flex;
     padding: 0;

@@ -8,6 +8,7 @@ $router->get('/about', 'PagesController@getAbout');
 $router->get('/contact', 'PagesController@getContact');
 $router->get('/login', 'PagesController@getLogin');
 $router->get('/register', 'PagesController@getRegister');
+$router->get('/posts', 'PagesController@getPosts');
 
 # post
 $router->post('/login-user', 'UserController@login');
