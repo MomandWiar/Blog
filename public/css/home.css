@@ -22,7 +22,6 @@
 .info {
     width: 5%;
     text-align: right;
-    font-weight: bold;
 }
 
 .info:hover {
@@ -41,17 +40,18 @@
     text-overflow: ellipsis;
 }
 
-.pages {
-    display: flex;
-    font-size: 20px;
+.pagination {
+    margin-top: 50px;
+    width: 100%;
+    display: inline-flex;
+    height: 25px;
 }
 
-.pages p {
-    margin: 0 10px;
-}
-
-.pages-nav {
-    width: 255px;
+.pagination-options {
     display: flex;
     margin: auto;
+}
+
+.pagination-options a, .pagination-options p {
+    margin: 0 10px;
 }

@@ -7,8 +7,4 @@
             <li><a href="/login">login</a></li>
         </ul>
     </nav>
-    <div class="header-title">
-        <h1>Welcome to our Blog</h1>
-        <h4>Search around for a interesting item!</h4>
-    </div>
 </header>
