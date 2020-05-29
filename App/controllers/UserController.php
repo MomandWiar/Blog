@@ -8,7 +8,7 @@ class UserController extends Controller
     public function login()
     {
         if (!empty($_POST['username']) && !empty($_POST['password'])) {
-            $check = App::get('database')->selectAllWhere(
+            App::get('database')->selectWhere(
                 'users',
                 [
                     'username' => $_POST['username'],
@@ -16,9 +16,11 @@ class UserController extends Controller
                 ]
             );
 
-            if ($check == true) {
+            $check_if_user_exist = App::get('database')->fetch();
+
+            if ($check_if_user_exist == true) {
                 $_SESSION['status'] = 1;
-                $_SESSION['attributes'] = $check;
+                $_SESSION['attributes'] = $check_if_user_exist;
                 $this->redirect('/');
             }
         }
@@ -33,7 +35,7 @@ class UserController extends Controller
 
     public function register()
     {
-        $check = App::get('database')->selectAllWhere(
+        $check = App::get('database')->selectWhere(
             'users',
             [
                 'username' => $_POST['username'],

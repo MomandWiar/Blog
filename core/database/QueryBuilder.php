@@ -11,12 +11,13 @@ use \PDO;
 class QueryBuilder
 {
     protected $pdo;
+    private $statement;
 
     /**
      * Querybuilder constructor.
      * @param PDO $pdo
      */
-    public function __construct(PDO $pdo)
+    public function __construct($pdo)
     {
         $this->pdo = $pdo;
     }
@@ -24,27 +25,21 @@ class QueryBuilder
     /**
      * selects whatever user passes
      *
-     * @param String $table
-     * @return array with all data from table_name
+     * @param String $query
      */
     public function createQuery($query)
     {
-        $statement = $this->pdo->prepare($query);
-        $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_CLASS);
+        $this->statement = $this->pdo->prepare($query);
     }
 
     /**
      * selects all data from table_name
      *
      * @param String $table
-     * @return array with all data from table_name
      */
     public function selectAll($table)
     {
-        $statement = $this->pdo->prepare("SELECT * FROM {$table}");
-        $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_CLASS);
+        $this->statement = $this->pdo->prepare("SELECT * FROM {$table}");
     }
 
     /**
@@ -52,9 +47,9 @@ class QueryBuilder
      * with where statement
      *
      * @param String $table
-     * @return array with all data from table_name
+     * @param Array $where
      */
-    public function selectAllWhere($table, $where)
+    public function selectWhere($table, $where)
     {
         $symbol = ' = ';
         $sql = sprintf(
@@ -71,9 +66,7 @@ class QueryBuilder
         );
 
         try {
-            $statement = $this->pdo->prepare($sql);
-            $statement->execute($where);
-            return $statement->fetchAll(PDO::FETCH_CLASS);
+            $this->statement = $this->pdo->prepare($sql);
         } catch (Exception $e) {
             die('Woops, Something went wrong<br>');
         }
@@ -101,5 +94,59 @@ class QueryBuilder
         } catch (Exception $e) {
             die('Woops, Something went wrong<br>');
         }
+    }
+
+    public function update($table, $parameters, $where)
+    {
+        $symbol = ' = ';
+        $sql = sprintf(
+            "UPDATE %s SET %s WHERE %s",
+            $table,
+            implode(', ', array_map(
+                    function($k, $v) use($symbol) {
+                        return $k . $symbol . "'" . $v . "'";
+                    },
+                    array_keys($parameters),
+                    array_values($parameters)
+                )
+            ),
+            implode(' AND ', array_map(
+                    function($k, $v) use($symbol) {
+                        return $k . $symbol . "'" . $v . "'";
+                    },
+                    array_keys($where),
+                    array_values($where)
+                )
+            )
+        );
+
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute($parameters);
+        } catch (Exception $e) {
+            die('Woops, Something went wrong<br>');
+        }
+    }
+
+    /**
+     * fetches only one array from database
+     *
+     * @param array $where
+     * @return array with the result of the query
+     */
+    public function fetch($where = []) {
+        $this->statement->execute($where);
+        return $this->statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * fetches multiple arrays from database
+     *
+     * @param array $where
+     * @return array with the results of the query
+     */
+    public function fetchAll($where = []) {
+        $this->statement->execute($where);
+        return $this->statement->fetchAll(PDO::FETCH_CLASS);
     }
 }

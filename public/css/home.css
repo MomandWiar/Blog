@@ -63,3 +63,7 @@
 .pagination-options a, .pagination-options p {
     margin: 0 10px;
 }
+
+.pagination-options .hide {
+    visibility: hidden;
+}

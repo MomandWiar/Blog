@@ -8,17 +8,29 @@
 
     <a href="/posts/create-post">Click here to create a new Post!</a>
 
-<?php include './App/views/partials/table.php'; ?>
+    <section class="blog">
+        <?php foreach ($data['paginate_result']['posts'] as $post) : ?>
+            <ul>
+                <li class="number"><?= $post->id; ?></li>
+                <li class="title"><a href="#"><?= $post->title; ?></a></li>
+                <li class="description"><?= $post->description; ?></li>
+                <li class="date"><?= date('Y-m-d', strtotime($post->date)); ?></li>
+                <a href='/posts/edit-post?postId=<?= $post->id; ?>' class="info">Edit</a>
+
+            </ul>
+        <?php endforeach; ?>
+    </section>
+
+<?php
+    $page_number = $data['paginate_result']['page_number'];
+    $number_of_pages = $data['paginate_result']['number_of_pages'];
+?>
 
     <section class="pagination">
         <div class="pagination-options">
-            <?php if($data['result']['page_number'] - 1) : ?>
-                <a href="/posts?page=<?= $data['result']['page_number'] - 1; ?>">Last Page</a>
-            <?php endif; ?>
-            <p><?= $data['result']['page_number'] ?></p>
-            <?php if($data['result']['page_number'] < $data['result']['number_of_pages']) : ?>
-                <a href="/posts?page=<?= $data['result']['page_number'] + 1; ?>">Next Page</a>
-            <?php endif; ?>
+            <a class="<?= $page_number <= 1 ? 'hide' : '' ?>" href="/posts?page=<?= $page_number - 1; ?>">Last Page</a>
+            <p><?= $page_number ?></p>
+            <a class="<?= $page_number >= $number_of_pages ? 'hide' : '' ?>" href="/posts?page=<?= $page_number + 1; ?>">Next Page</a>
         </div>
     </section>
 

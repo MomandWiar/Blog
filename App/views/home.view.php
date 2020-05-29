@@ -8,15 +8,16 @@
 
 <?php include 'partials/table.php '?>
 
+<?php
+    $page_number = $data['paginate_result']['page_number'];
+    $number_of_pages = $data['paginate_result']['number_of_pages'];
+?>
+
     <section class="pagination">
         <div class="pagination-options">
-            <?php if($data['result']['page_number'] - 1) : ?>
-                <a class='hide' href="/?page=<?= $data['result']['page_number'] - 1; ?>">Last Page</a>
-            <?php endif; ?>
-            <p><?= $data['result']['page_number'] ?></p>
-            <?php if($data['result']['page_number'] < $data['result']['number_of_pages']) : ?>
-                <a class='hide' href="/?page=<?= $data['result']['page_number'] + 1; ?>">Next Page</a>
-            <?php endif; ?>
+            <a class="<?= $page_number <= 1 ? 'hide' : '' ?>" href="/?page=<?= $page_number - 1; ?>">Last Page</a>
+            <p><?= $page_number ?></p>
+            <a class="<?= $page_number >= $number_of_pages ? 'hide' : '' ?>" href="/?page=<?= $page_number + 1; ?>">Next Page</a>
         </div>
     </section>
 
