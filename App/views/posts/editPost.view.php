@@ -8,12 +8,14 @@
 
     <a href="/posts">Never mind go Back!</a>
 
-    <form action="/posts/save-post?postId=<?= $_GET['postId'] ?>" method="post">
+    <form action="/posts/edit-post?postId=<?= $_GET['postId'] ?>" method="post">
         <input name='title' type="text" class='highlight' placeholder="Title" value="<?= $data['post_attributes']['title'] ?>">
         <input name='content' type="text" placeholder="Content" value="<?= $data['post_attributes']['content'] ?>">
         <textarea name='description' maxlength="500" placeholder="Description" rows="5" cols="75"><?= $data['post_attributes']['description'] ?></textarea>
         <input type="hidden" name="date" value="<?= $data['post_attributes']['date'] ?>">
-        <button type='submit'>Save the Typos!</button>
+        <button type="submit" name="action" value="update">Save the Typos!</button>
+        <p></p>
+        <button type="submit" name="action" value="delete">Just Delete it!</button>
     </form>
 
 <?php include './App/views/partials/footer.php'; ?>

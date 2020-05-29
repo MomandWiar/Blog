@@ -8,7 +8,7 @@
 
     <a href="/posts">Never mind go Back!</a>
 
-    <form action="save-post" method="post">
+    <form action="/posts/create-post" method="post">
         <input name='title' type="text" class='highlight' placeholder="Title">
         <input name='content' type="text" placeholder="Content">
         <textarea name='description' maxlength="500" placeholder="Description" rows="5" cols="75"></textarea>

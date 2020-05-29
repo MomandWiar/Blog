@@ -30,21 +30,35 @@ class PostController extends Controller
     public function updatePost()
     {
         if (!empty($_POST['title']) && !empty($_POST['description']) && !empty($_POST['content'])) {
-            App::get('database')->update(
-                'posts',
-                [
-                    'title' => $_POST['title'],
-                    'description' => $_POST['description'],
-                    'content' => $_POST['content'],
-                    'date' => $_POST['date']
-                ],
-                [
-                    'id' => $_GET['postId'],
-                    'userId' => $_SESSION['attributes']['id']
-                ]
-            );
-            $this->redirect('/posts');
+            if ($_POST['action'] == 'update') {
+                App::get('database')->update(
+                    'posts',
+                    [
+                        'title' => $_POST['title'],
+                        'description' => $_POST['description'],
+                        'content' => $_POST['content'],
+                        'date' => $_POST['date']
+                    ],
+                    [
+                        'id' => $_GET['postId'],
+                        'userId' => $_SESSION['attributes']['id']
+                    ]
+                );
+                $this->redirect('/posts');
+            } else if ($_POST['action'] == 'delete') {
+                App::get('database')->update(
+                    'posts',
+                    [
+                        'deleted' => 1,
+                    ],
+                    [
+                        'id' => $_GET['postId'],
+                        'userId' => $_SESSION['attributes']['id']
+                    ]
+                );
+                $this->redirect('/posts');
+            }
+            $this->redirect('/posts/edit-post');
         }
-        $this->redirect('/posts/edit-post');
     }
 }

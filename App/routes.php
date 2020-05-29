@@ -24,4 +24,5 @@ $router->get('/posts/edit-post{pageId}', 'PagesController@getEditPost');
 # POST
 $router->post('/login-user', 'UserController@login');
 $router->post('/register-user', 'UserController@register');
-$router->post('/posts/save-post', 'PostController@updatePost');
+$router->post('/posts/create-post', 'PostController@savePost');
+$router->post('/posts/edit-post', 'PostController@updatePost');

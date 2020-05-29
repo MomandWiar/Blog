@@ -43,14 +43,16 @@ class PagesController extends Controller
         App::get('database')->selectWhere(
             'posts',
             [
-                'userId' => $_SESSION['attributes']['id']
+                'userId' => $_SESSION['attributes']['id'],
+                'deleted' => 0
             ]
         );
 
         $total_number_of_posts_by_id = count(
             App::get('database')->fetchAll(
                 [
-                    'userId' => $_SESSION['attributes']['id']
+                    'userId' => $_SESSION['attributes']['id'],
+                    'deleted' => 0
                 ]
             )
         );
