@@ -77,48 +77,50 @@ class QueryBuilder
      * table_name and parameters
      *
      * @param String $table
-     * @param array $parameters
+     * @param array $values
      */
-    public function insert($table, $parameters)
+    public function insert($table, $values)
     {
         $sql = sprintf(
             "INSERT INTO %s (%s) VALUES (%s)",
             $table,
-            implode(', ', array_keys($parameters)),
-            ':' . implode(', :', array_keys($parameters))
+            implode(', ', array_keys($values)),
+            ':' . implode(', :', array_keys($values))
         );
 
         try {
             $statement = $this->pdo->prepare($sql);
-            $statement->execute($parameters);
+            $statement->execute($values);
         } catch (Exception $e) {
             die('Woops, Something went wrong<br>');
         }
     }
 
-    public function update($table, $parameters, $where)
+    public function update($table, $set, $where)
     {
-        $symbol = ' = ';
+        $separator = ' = ';
         $sql = sprintf(
             "UPDATE %s SET %s WHERE %s",
             $table,
             implode(', ', array_map(
-                    function($k, $v) use($symbol) {
-                        return $k . $symbol . "'" . $v . "'";
+                    function($key, $value) use($separator) {
+                        return $key . $separator . ':' . $value;
                     },
-                    array_keys($parameters),
-                    array_values($parameters)
+                    array_keys($set),
+                    array_keys($set)
                 )
             ),
             implode(' AND ', array_map(
-                    function($k, $v) use($symbol) {
-                        return $k . $symbol . "'" . $v . "'";
+                    function($key, $value) use($separator) {
+                        return $key . $separator . ':' . $value;
                     },
                     array_keys($where),
-                    array_values($where)
+                    array_keys($where)
                 )
             )
         );
+
+        $parameters = array_merge($set, $where);
 
         try {
             $statement = $this->pdo->prepare($sql);
