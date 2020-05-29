@@ -22,9 +22,9 @@ class PostController extends Controller
                     'userId' => $_SESSION['attributes']['id']
                 ]
             );
-            $this->redirect('/posts');
+            $this->redirect('/post');
         }
-        $this->redirect('/posts/create-post');
+        $this->redirect('/post/create-post');
     }
 
     public function updatePost()
@@ -44,7 +44,7 @@ class PostController extends Controller
                         'userId' => $_SESSION['attributes']['id']
                     ]
                 );
-                $this->redirect('/posts');
+                $this->redirect('/post');
             } else if ($_POST['action'] == 'delete') {
                 App::get('database')->update(
                     'posts',
@@ -56,9 +56,9 @@ class PostController extends Controller
                         'userId' => $_SESSION['attributes']['id']
                     ]
                 );
-                $this->redirect('/posts');
+                $this->redirect('/post');
             }
-            $this->redirect('/posts/edit-post');
+            $this->redirect('/post/edit-post');
         }
     }
 }

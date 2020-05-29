@@ -1,0 +1,19 @@
+li {
+    margin: 20px 0;
+}
+
+form button {
+    margin: 25px 0;
+}
+
+form a {
+    margin: 25px 0;
+}
+
+.input-title {
+    margin: 25px 0;
+}
+
+.input-title h2 {
+    font-weight: lighter;
+}

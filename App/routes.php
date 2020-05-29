@@ -15,14 +15,19 @@ $router->get('/login', 'PagesController@getLogin');
 $router->get('/logout-user', 'UserController@logout');
 $router->get('/register', 'PagesController@getRegister');
 
-$router->get('/posts', 'PagesController@getPosts');
-$router->get('/posts{page}', 'PagesController@getPosts');
-$router->get('/posts/create-post', 'PagesController@getCreatePost');
-$router->get('/posts/edit-post', 'PagesController@getEditPost');
-$router->get('/posts/edit-post{pageId}', 'PagesController@getEditPost');
+$router->get('/post', 'PagesController@getPosts');
+$router->get('/post{page}', 'PagesController@getPosts');
+$router->get('/post/create-post', 'PagesController@getCreatePost');
+$router->get('/post/edit-post', 'PagesController@getEditPost');
+$router->get('/post/edit-post{pageId}', 'PagesController@getEditPost');
+
+$router->get('/account', 'PagesController@getAccount');
+$router->get('/account/profile', 'PagesController@getAccountProfile');
+$router->get('/account/customize', 'PagesController@getAccountCustomize');
 
 # POST
 $router->post('/login-user', 'UserController@login');
 $router->post('/register-user', 'UserController@register');
-$router->post('/posts/create-post', 'PostController@savePost');
-$router->post('/posts/edit-post', 'PostController@updatePost');
+$router->post('/post/create-post', 'PostController@savePost');
+$router->post('/post/edit-post', 'PostController@updatePost');
+$router->post('/account/update-profile', 'AccountController@updateProfile');

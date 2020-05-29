@@ -6,9 +6,9 @@
         <h4>I know that you are here to just Fix some Typos!</h4>
     </div>
 
-    <a href="/posts">Never mind go Back!</a>
+    <a href="/post">Never mind go Back!</a>
 
-    <form action="/posts/edit-post?postId=<?= $_GET['postId'] ?>" method="post">
+    <form action="/post/edit-post?postId=<?= $_GET['postId'] ?>" method="post">
         <input autocomplete="off" name='title' type="text" class='highlight' placeholder="Title" value="<?= $data['post_attributes']['title'] ?>">
         <input autocomplete="off" name='content' type="text" placeholder="Content" value="<?= $data['post_attributes']['content'] ?>">
         <textarea name='description' maxlength="500" placeholder="Description" rows="5" cols="75"><?= $data['post_attributes']['description'] ?></textarea>

@@ -49,7 +49,38 @@ class QueryBuilder
      * @param String $table
      * @param Array $where
      */
-    public function selectWhere($table, $where)
+    public function selectWhere($table, $data, $where)
+    {
+        $symbol = ' = ';
+        $sql = sprintf(
+            "SELECT %s FROM %s WHERE %s",
+            implode(', ', $data),
+            $table,
+            implode(' AND ', array_map(
+                    function($k, $v) use($symbol) {
+                        return $k . $symbol . "'" . $v . "'";
+                    },
+                    array_keys($where),
+                    array_values($where)
+                )
+            )
+        );
+
+        try {
+            $this->statement = $this->pdo->prepare($sql);
+        } catch (Exception $e) {
+            die('Woops, Something went wrong<br>');
+        }
+    }
+
+    /**
+     * selects all data from table_name
+     * with where statement
+     *
+     * @param String $table
+     * @param Array $where
+     */
+    public function selectAllWhere($table, $where)
     {
         $symbol = ' = ';
         $sql = sprintf(

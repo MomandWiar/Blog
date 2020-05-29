@@ -6,16 +6,16 @@
         <h4>Here you can Create or Edit a Post!</h4>
     </div>
 
-    <a href="/posts/create-post">Click here to create a new Post!</a>
+    <a href="/post/create-post">Click here to create a new Post!</a>
 
     <section class="blog">
-        <?php foreach ($data['paginate_result']['posts'] as $post) : ?>
+        <?php foreach ($data['paginate_result']['post'] as $post) : ?>
             <ul>
                 <li class="number"><?= $post->id; ?></li>
                 <li class="title"><a href="#"><?= $post->title; ?></a></li>
                 <li class="description"><?= $post->description; ?></li>
                 <li class="date"><?= date('Y-m-d', strtotime($post->date)); ?></li>
-                <a href='/posts/edit-post?postId=<?= $post->id; ?>' class="info">Edit</a>
+                <a href='/post/edit-post?postId=<?= $post->id; ?>' class="info">Edit</a>
 
             </ul>
         <?php endforeach; ?>

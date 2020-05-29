@@ -21,10 +21,10 @@ class Controller
      * @param String $name
      * @return void
      */
-    public function view($name, $data = [])
+    public function view($fileName, $data = [])
     {
         extract($data);
-        return require "App/views/{$name}.view.php";
+        return require "App/views/{$fileName}.view.php";
     }
 
     /**

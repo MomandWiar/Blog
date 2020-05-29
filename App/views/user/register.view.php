@@ -1,9 +1,9 @@
-<?php include 'partials/head.php'; ?>
-<?php include 'partials/navbar.php'; ?>
+<?php include './App/views/partials/head.php'; ?>
+<?php include './App/views/partials/navbar.php'; ?>
 
     <div class="header-title">
         <h1>Register</h1>
-        <h4>Be part of our Team!</h4>
+        <h4>Join the Dark Side!</h4>
     </div>
 
     <form action="/register-user" METHOD="POST">
@@ -17,4 +17,4 @@
         </div>
     </form>
 
-<?php include 'partials/footer.php'; ?>
+<?php include './App/views/partials/footer.php'; ?>

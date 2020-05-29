@@ -25,7 +25,7 @@ class PaginationController
             $posts = $this->getAmountOfPosts($starting_page_number, $posts_per_page);
         }
 
-        return ['posts' => $posts, 'page_number' => $page_number, 'number_of_pages' => $number_of_pages];
+        return ['post' => $posts, 'page_number' => $page_number, 'number_of_pages' => $number_of_pages];
     }
 
     private function getAmountOfPosts($starting_page_number, $posts_per_page)
@@ -37,7 +37,6 @@ class PaginationController
             ORDER BY date DESC
             LIMIT {$starting_page_number}, {$posts_per_page}"
         );
-
         return App::get('database')->fetchAll();
     }
 
@@ -47,10 +46,9 @@ class PaginationController
             "SELECT *
             FROM posts
             WHERE deleted = '0' AND userId = '{$_SESSION['attributes']['id']}'
-            ORDER BY date
+            ORDER BY date DESC
             LIMIT {$starting_page_number}, {$posts_per_page}"
         );
-
         return App::get('database')->fetchAll();
     }
 

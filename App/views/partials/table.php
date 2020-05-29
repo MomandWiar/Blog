@@ -1,5 +1,5 @@
 <section class="blog">
-    <?php foreach ($data['paginate_result']['posts'] as $post) : ?>
+    <?php foreach ($data['paginate_result']['post'] as $post) : ?>
         <ul>
             <li class="number"><?= $post->id ?></li>
             <li class="title"><a href="#"><?= $post->title ?></a></li>

@@ -8,19 +8,20 @@ class UserController extends Controller
     public function login()
     {
         if (!empty($_POST['username']) && !empty($_POST['password'])) {
-            App::get('database')->selectWhere(
+            App::get('database')->selectAllWhere(
                 'users',
                 [
                     'username' => $_POST['username'],
-                    'password' => md5($_POST['password'])
+                    'password' => md5($_POST['password']),
+                    'deleted' => 0
                 ]
             );
 
-            $check_if_user_exist = App::get('database')->fetch();
+            $user = App::get('database')->fetch();
 
-            if ($check_if_user_exist == true) {
+            if ($user == true) {
                 $_SESSION['status'] = 1;
-                $_SESSION['attributes'] = $check_if_user_exist;
+                $_SESSION['attributes'] = $user;
                 $this->redirect('/');
             }
         }
@@ -35,24 +36,26 @@ class UserController extends Controller
 
     public function register()
     {
-        $check = App::get('database')->selectWhere(
-            'users',
-            [
-                'username' => $_POST['username'],
-            ]
-        );
+        if (!empty($_POST['username']) && !empty($_POST['password'])) {
+            $check_if_user_exist = App::get('database')->selectWhere(
+                'users',
+                [
+                    'username' => $_POST['username'],
+                ]
+            );
 
-        if (!$check) {
-            if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['passwordRetry'])) {
-                if ($_POST['password'] == $_POST['passwordRetry']) {
-                    App::get('database')->insert(
-                        'users',
-                        [
-                            'username' => $_POST['username'],
-                            'password' => md5($_POST['password'])
-                        ]
-                    );
-                    $this->redirect('login');
+            if (!$check_if_user_exist) {
+                if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['passwordRetry'])) {
+                    if ($_POST['password'] == $_POST['passwordRetry']) {
+                        App::get('database')->insert(
+                            'users',
+                            [
+                                'username' => $_POST['username'],
+                                'password' => md5($_POST['password'])
+                            ]
+                        );
+                        $this->redirect('login');
+                    }
                 }
             }
         }
