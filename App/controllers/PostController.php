@@ -22,7 +22,8 @@ class PostController extends Controller
                     'userId' => $_SESSION['attributes'][0]->id
                 ]
             );
+            $this->redirect('/posts');
         }
-        $this->redirect('/posts');
+        $this->redirect('/posts/create-post');
     }
 }

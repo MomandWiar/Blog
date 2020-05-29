@@ -39,16 +39,17 @@ class UserController extends Controller
                 'username' => $_POST['username'],
             ]
         );
+
         if (!$check) {
-            if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['passwordRetry'])) {
+            if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['passwordRetry'])) {
                 if ($_POST['password'] == $_POST['passwordRetry']) {
                     App::get('database')->insert(
                         'users',
                         [
                             'username' => $_POST['username'],
                             'password' => md5($_POST['password'])
-                    ]
-                );
+                        ]
+                    );
                     $this->redirect('login');
                 }
             }
