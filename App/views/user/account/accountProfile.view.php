@@ -3,7 +3,7 @@
 
     <div class="header-title">
         <h1>Account Profile</h1>
-        <h4>We sorry but we do not support Gender Transformation!</h4>
+        <h4>We are sorry but we do not support Gender Transformation!</h4>
     </div>
 
     <a href="/account">Never mind go Back!</a>

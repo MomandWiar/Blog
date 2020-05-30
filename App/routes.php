@@ -7,7 +7,13 @@
 $router->get('/', 'PagesController@getHome');
 $router->get('/{page}', 'PagesController@getHome');
 
-$router->get('/about', 'PagesController@getAbout');
+$router->get('/moreInfo', 'PagesController@getMoreInfoAbout');
+$router->get('/moreInfo{about}', 'PagesController@getMoreInfoAbout');
+
+$router->get('/comment/delete-comment', 'CommentController@deleteComment');
+$router->get('/comment/delete-comment{where}', 'CommentController@deleteComment');
+
+$router->get('/aboutUs', 'PagesController@getAbout');
 
 $router->get('/contact', 'PagesController@getContact');
 
@@ -31,3 +37,4 @@ $router->post('/register-user', 'UserController@register');
 $router->post('/post/create-post', 'PostController@savePost');
 $router->post('/post/edit-post', 'PostController@updatePost');
 $router->post('/account/update-profile', 'AccountController@updateProfile');
+$router->post('/comment/create-comment', 'CommentController@createComment');

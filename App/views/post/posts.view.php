@@ -10,13 +10,12 @@
 
     <section class="blog">
         <?php foreach ($data['paginate_result']['post'] as $post) : ?>
-            <ul>
-                <li class="number"><?= $post->postId; ?></li>
-                <li class="title"><a href="#"><?= $post->title; ?></a></li>
-                <li class="description"><?= $post->description; ?></li>
+            <ul id="post<?= $post->postId ?>">
+                <li class="number"><?= $post->postId ?></li>
+                <li class="title"><a href="moreInfo?about=<?= $post->postId; ?>&id=$post"><?= $post->title ?></a></li>
+                <li class="description"><?= $post->description ?></li>
                 <li class="date"><?= date('Y-m-d', strtotime($post->date)); ?></li>
                 <a href='/post/edit-post?postId=<?= $post->postId; ?>' class="info">Edit</a>
-
             </ul>
         <?php endforeach; ?>
     </section>

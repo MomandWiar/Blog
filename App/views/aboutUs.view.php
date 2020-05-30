@@ -3,7 +3,7 @@
 
     <div class="header-title">
         <h1>About Us</h1>
-        <h4>It's ALL about us!</h4>
+        <h4>It's ALL about Us!</h4>
     </div>
 
 <?php include 'partials/footer.php'; ?>

@@ -6,18 +6,23 @@
         <h4>Search around for a interesting item!</h4>
     </div>
 
-<?php include 'partials/table.php '?>
-
-<?php
-    $page_number = $data['paginate_result']['page_number'];
-    $number_of_pages = $data['paginate_result']['number_of_pages'];
-?>
+    <section class="blog">
+        <?php foreach ($data['paginate_result']['post'] as $post) : ?>
+            <ul id="post<?= $post->postId ?>">
+                <li class="number"><?= $post->postId ?></li>
+                <li class="title"><a href="moreInfo?about=<?= $post->postId; ?>"><?= $post->title ?></a></li>
+                <li class="description"><?= $post->description ?></li>
+                <li class="date"><?= date('Y-m-d', strtotime($post->date)); ?></li>
+                <a class="info" id="info<?= $post->postId ?>" onclick="showComments(<?= $post->postId ?>)">+</a>
+            </ul>
+        <?php endforeach; ?>
+    </section>
 
     <section class="pagination">
         <div class="pagination-options">
-            <a class="<?= $page_number <= 1 ? 'hide' : '' ?>" href="/?page=<?= $page_number - 1; ?>">Last Page</a>
-            <p><?= $page_number ?></p>
-            <a class="<?= $page_number >= $number_of_pages ? 'hide' : '' ?>" href="/?page=<?= $page_number + 1; ?>">Next Page</a>
+            <a class="<?= $data['page_number'] <= 1 ? 'hide' : '' ?>" href="/?page=<?= $data['page_number'] - 1; ?>">Last Page</a>
+            <p><?= $data['page_number'] ?></p>
+            <a class="<?= $data['page_number'] >= $data['number_of_pages'] ? 'hide' : '' ?>" href="/?page=<?= $data['page_number'] + 1; ?>">Next Page</a>
         </div>
     </section>
 

@@ -22,14 +22,59 @@ class PagesController extends Controller
 
         $paginate_result = $this->pagination->paginate($total_number_of_posts);
 
+        $page_number = $paginate_result['page_number'];
+        $number_of_pages = $paginate_result['number_of_pages'];
         $css = 'home';
-        $this->view('home', compact('paginate_result', 'css'));
+        $js = 'home';
+
+        $this->view('home', compact('paginate_result', 'css', 'js', 'number_of_pages', 'page_number'));
+    }
+
+    public function getMoreInfoAbout()
+    {
+        App::get('database')->selectAllWhere(
+            'posts',
+            [
+                'postId' => $_GET['about']
+            ]
+        );
+
+        $post = App::get('database')->fetch();
+
+        App::get('database')->selectWhere(
+            'users',
+            [
+                'username',
+                'created'
+            ],
+            [
+                'userId' => $post['userId']
+            ]
+        );
+
+        $user = App::get('database')->fetch();
+
+        App::get('database')->createQuery(
+            "SELECT comments.*, users.username
+            FROM comments
+            LEFT JOIN users
+            ON users.userid = comments.userId
+            WHERE comments.deleted = 0 
+            AND comments.postId = {$post['postId']} 
+            ORDER BY comments.created DESC"
+        );
+
+        $comments = App::get('database')->fetchAll();
+
+        $css = ['moreInfoAbout', 'form'];
+
+        $this->view('moreInfo/about', compact('css', 'post', 'user', 'comments'));
     }
 
     public function getAbout()
     {
-        $css = 'about';
-        $this->view('about', compact('css'));
+        $css = 'aboutUs';
+        $this->view('aboutUs', compact('css'));
     }
 
     public function getContact()
@@ -58,8 +103,8 @@ class PagesController extends Controller
         );
 
         $paginate_result = $this->pagination->paginate($total_number_of_posts_by_id, true);
-
         $css = 'home';
+
         $this->view('post/posts', compact('paginate_result', 'css'));
     }
 
@@ -77,8 +122,8 @@ class PagesController extends Controller
         );
 
         $post_attributes = App::get('database')->fetch();
-
         $css = 'form';
+
         $this->view('post/editPost', compact('css', 'post_attributes'));
     }
 
@@ -113,8 +158,8 @@ class PagesController extends Controller
         );
 
         $username = App::get('database')->fetch()['username'];
+        $css = ['account', 'form'];
 
-        $css = ['account', 'form'];;
         $this->view('user/account/accountProfile', compact('css', 'username'));
     }
 
