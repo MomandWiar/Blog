@@ -20,16 +20,11 @@
         <?php endforeach; ?>
     </section>
 
-<?php
-    $page_number = $data['paginate_result']['page_number'];
-    $number_of_pages = $data['paginate_result']['number_of_pages'];
-?>
-
     <section class="pagination">
         <div class="pagination-options">
-            <a class="<?= $page_number <= 1 ? 'hide' : '' ?>" href="/post?page=<?= $page_number - 1; ?>">Last Page</a>
-            <p><?= $page_number ?></p>
-            <a class="<?= $page_number >= $number_of_pages ? 'hide' : '' ?>" href="/post?page=<?= $page_number + 1; ?>">Next Page</a>
+            <a class="<?= $data['page_number'] <= 1 ? 'hide' : '' ?>" href="/post?page=<?= $data['page_number'] - 1; ?>">Last Page</a>
+            <p><?= $data['page_number'] ?></p>
+            <a class="<?= $data['page_number'] >= $data['number_of_pages'] ? 'hide' : '' ?>" href="/post?page=<?= $data['page_number'] + 1; ?>">Next Page</a>
         </div>
     </section>
 

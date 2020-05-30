@@ -16,11 +16,16 @@ class PagesController extends Controller
 
     public function getHome()
     {
-        App::get('database')->selectAll('posts');
+        App::get('database')->selectAllWhere(
+            'posts',
+            [
+                'deleted' => 0
+            ]
+        );
 
-        $total_number_of_posts = count(App::get('database')->fetchAll());
+        $total_posts_per_page = count(App::get('database')->fetchAll());
 
-        $paginate_result = $this->pagination->paginate($total_number_of_posts);
+        $paginate_result = $this->pagination->paginate($total_posts_per_page);
 
         $page_number = $paginate_result['page_number'];
         $number_of_pages = $paginate_result['number_of_pages'];
@@ -93,7 +98,7 @@ class PagesController extends Controller
             ]
         );
 
-        $total_number_of_posts_by_id = count(
+        $total_posts_per_page_by_id = count(
             App::get('database')->fetchAll(
                 [
                     'userId' => $_SESSION['attributes']['userId'],
@@ -102,10 +107,12 @@ class PagesController extends Controller
             )
         );
 
-        $paginate_result = $this->pagination->paginate($total_number_of_posts_by_id, true);
+        $paginate_result = $this->pagination->paginate($total_posts_per_page_by_id, true);
+        $page_number = $paginate_result['page_number'];
+        $number_of_pages = $paginate_result['number_of_pages'];
         $css = 'home';
 
-        $this->view('post/posts', compact('paginate_result', 'css'));
+        $this->view('post/posts', compact('paginate_result', 'css', 'page_number', 'number_of_pages'));
     }
 
     public function getCreatePost() {

@@ -35,6 +35,7 @@ class CommentController extends Controller
             );
             $this->redirect('/moreInfo?about=' . $_POST['postId']);
         }
+        $this->redirect('/moreInfo?about=' . $_POST['postId']);
     }
 
     public function deleteComment()
@@ -48,6 +49,6 @@ class CommentController extends Controller
                 'commentId' => $_GET['where']
             ]
         );
-        $this->redirect('/');
+        $this->redirect('/moreInfo?' . $_GET['params']);
     }
 }
