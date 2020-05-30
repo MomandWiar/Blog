@@ -17,7 +17,7 @@ class AccountController extends Controller
                             'password' => md5($_POST['password'])
                         ],
                         [
-                            'id' => $_SESSION['attributes']['id']
+                            'userId' => $_SESSION['attributes']['userId']
                         ]
                     );
                 } else {
@@ -27,7 +27,7 @@ class AccountController extends Controller
                             'username' => $_POST['username'],
                         ],
                         [
-                            'id' => $_SESSION['attributes']['id']
+                            'userId' => $_SESSION['attributes']['userId']
                         ]
                     );
                 }
@@ -39,7 +39,7 @@ class AccountController extends Controller
                         'deleted' => 1
                     ],
                     [
-                        'id' => $_SESSION['attributes']['id']
+                        'userId' => $_SESSION['attributes']['userId']
                     ]
                 );
                 $_SESSION['attributes']['deleted'] = 1;

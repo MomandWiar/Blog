@@ -41,6 +41,9 @@ class UserController extends Controller
                 'users',
                 [
                     'username' => $_POST['username'],
+                ],
+                [
+                    'username'
                 ]
             );
 
@@ -51,7 +54,8 @@ class UserController extends Controller
                             'users',
                             [
                                 'username' => $_POST['username'],
-                                'password' => md5($_POST['password'])
+                                'password' => md5($_POST['password']),
+                                'created' => date('Y-m-d')
                             ]
                         );
                         $this->redirect('login');

@@ -45,7 +45,7 @@ class PaginationController
         App::get('database')->createQuery(
             "SELECT *
             FROM posts
-            WHERE deleted = '0' AND userId = '{$_SESSION['attributes']['id']}'
+            WHERE deleted = '0' AND userId = '{$_SESSION['attributes']['userId']}'
             ORDER BY date DESC
             LIMIT {$starting_page_number}, {$posts_per_page}"
         );

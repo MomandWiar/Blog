@@ -11,11 +11,11 @@
     <section class="blog">
         <?php foreach ($data['paginate_result']['post'] as $post) : ?>
             <ul>
-                <li class="number"><?= $post->id; ?></li>
+                <li class="number"><?= $post->postId; ?></li>
                 <li class="title"><a href="#"><?= $post->title; ?></a></li>
                 <li class="description"><?= $post->description; ?></li>
                 <li class="date"><?= date('Y-m-d', strtotime($post->date)); ?></li>
-                <a href='/post/edit-post?postId=<?= $post->id; ?>' class="info">Edit</a>
+                <a href='/post/edit-post?postId=<?= $post->postId; ?>' class="info">Edit</a>
 
             </ul>
         <?php endforeach; ?>
@@ -28,9 +28,9 @@
 
     <section class="pagination">
         <div class="pagination-options">
-            <a class="<?= $page_number <= 1 ? 'hide' : '' ?>" href="/posts?page=<?= $page_number - 1; ?>">Last Page</a>
+            <a class="<?= $page_number <= 1 ? 'hide' : '' ?>" href="/post?page=<?= $page_number - 1; ?>">Last Page</a>
             <p><?= $page_number ?></p>
-            <a class="<?= $page_number >= $number_of_pages ? 'hide' : '' ?>" href="/posts?page=<?= $page_number + 1; ?>">Next Page</a>
+            <a class="<?= $page_number >= $number_of_pages ? 'hide' : '' ?>" href="/post?page=<?= $page_number + 1; ?>">Next Page</a>
         </div>
     </section>
 

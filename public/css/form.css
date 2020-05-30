@@ -50,3 +50,7 @@ form button:hover {
 .options p {
     margin: 16px 12px;
 }
+
+.description {
+    width: 715px;
+}

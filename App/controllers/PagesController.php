@@ -43,7 +43,7 @@ class PagesController extends Controller
         App::get('database')->selectAllWhere(
             'posts',
             [
-                'userId' => $_SESSION['attributes']['id'],
+                'userId' => $_SESSION['attributes']['userId'],
                 'deleted' => 0
             ]
         );
@@ -51,7 +51,7 @@ class PagesController extends Controller
         $total_number_of_posts_by_id = count(
             App::get('database')->fetchAll(
                 [
-                    'userId' => $_SESSION['attributes']['id'],
+                    'userId' => $_SESSION['attributes']['userId'],
                     'deleted' => 0
                 ]
             )
@@ -69,10 +69,10 @@ class PagesController extends Controller
     }
 
     public function getEditPost() {
-        App::get('database')->selectWhere(
+        App::get('database')->selectAllWhere(
             'posts',
             [
-                'id' => $_GET['postId']
+                'postId' => $_GET['postId']
             ]
         );
 
@@ -108,7 +108,7 @@ class PagesController extends Controller
                 'username'
             ],
             [
-                'id' => $_SESSION['attributes']['id']
+                'userId' => $_SESSION['attributes']['userId']
             ]
         );
 

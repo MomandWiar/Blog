@@ -19,7 +19,7 @@ class PostController extends Controller
                     'title' => $_POST['title'],
                     'description' => $_POST['description'],
                     'content' => $_POST['content'],
-                    'userId' => $_SESSION['attributes']['id']
+                    'userId' => $_SESSION['attributes']['userId']
                 ]
             );
             $this->redirect('/post');
@@ -40,8 +40,8 @@ class PostController extends Controller
                         'date' => $_POST['date']
                     ],
                     [
-                        'id' => $_GET['postId'],
-                        'userId' => $_SESSION['attributes']['id']
+                        'postId' => $_GET['postId'],
+                        'userId' => $_SESSION['attributes']['userId']
                     ]
                 );
                 $this->redirect('/post');
@@ -52,8 +52,8 @@ class PostController extends Controller
                         'deleted' => 1,
                     ],
                     [
-                        'id' => $_GET['postId'],
-                        'userId' => $_SESSION['attributes']['id']
+                        'postId' => $_GET['postId'],
+                        'userId' => $_SESSION['attributes']['userId']
                     ]
                 );
                 $this->redirect('/post');

@@ -10,8 +10,8 @@
 
     <form action="/post/create-post" method="post">
         <input autocomplete="off" name='title' type="text" class='highlight' placeholder="Title">
-        <input autocomplete="off" name='content' type="text" placeholder="Content">
-        <textarea name='description' maxlength="500" placeholder="Description" rows="5" cols="75"></textarea>
+        <input class='description' autocomplete="off" name='description' type="text" placeholder="Description">
+        <textarea name='content' maxlength="500" placeholder="Content" rows="5" cols="75"></textarea>
         <button type='submit'>Post it NOW!</button>
     </form>
 
