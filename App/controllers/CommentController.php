@@ -10,18 +10,6 @@ use Wiar\Core\App;
  */
 class CommentController extends Controller
 {
-    public function getAllComments()
-    {
-        App::get('database')->selectAllWhere(
-            'comments',
-            [
-                'deleted' => 0
-            ]
-        );
-
-        return App::get('database')->fetchAll();
-    }
-
     public function createComment()
     {
         if (!empty($_POST['comment'])) {

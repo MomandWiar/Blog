@@ -34,7 +34,10 @@ $router->get('/account/customize', 'PagesController@getAccountCustomize');
 # POST
 $router->post('/login-user', 'UserController@login');
 $router->post('/register-user', 'UserController@register');
+
 $router->post('/post/create-post', 'PostController@savePost');
 $router->post('/post/edit-post', 'PostController@updatePost');
+
 $router->post('/account/update-profile', 'AccountController@updateProfile');
+
 $router->post('/comment/create-comment', 'CommentController@createComment');

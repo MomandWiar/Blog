@@ -26,13 +26,9 @@ class PagesController extends Controller
         $total_posts_per_page = count(App::get('database')->fetchAll());
 
         $paginate_result = $this->pagination->paginate($total_posts_per_page);
-
-        $page_number = $paginate_result['page_number'];
-        $number_of_pages = $paginate_result['number_of_pages'];
         $css = 'home';
-        $js = 'home';
 
-        $this->view('home', compact('paginate_result', 'css', 'js', 'number_of_pages', 'page_number'));
+        $this->view('home', compact('paginate_result', 'css', 'js'));
     }
 
     public function getMoreInfoAbout()
@@ -108,8 +104,6 @@ class PagesController extends Controller
         );
 
         $paginate_result = $this->pagination->paginate($total_posts_per_page_by_id, true);
-        $page_number = $paginate_result['page_number'];
-        $number_of_pages = $paginate_result['number_of_pages'];
         $css = 'home';
 
         $this->view('post/posts', compact('paginate_result', 'css', 'page_number', 'number_of_pages'));
