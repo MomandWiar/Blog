@@ -13,6 +13,8 @@ $router->get('/moreInfo{about}', 'PagesController@getMoreInfoAbout');
 $router->get('/comment/delete-comment', 'CommentController@deleteComment');
 $router->get('/comment/delete-comment{where}', 'CommentController@deleteComment');
 
+$router->get('/test2', 'CommentController@testGetAllComments2');
+
 $router->get('/aboutUs', 'PagesController@getAbout');
 
 $router->get('/contact', 'PagesController@getContact');
@@ -41,3 +43,4 @@ $router->post('/post/edit-post', 'PostController@updatePost');
 $router->post('/account/update-profile', 'AccountController@updateProfile');
 
 $router->post('/comment/create-comment', 'CommentController@createComment');
+$router->post('/test', 'CommentController@testCreateComment');

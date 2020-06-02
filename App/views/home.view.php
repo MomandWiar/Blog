@@ -13,7 +13,7 @@
                 <li class="title"><a href="moreInfo?about=<?= $post->postId; ?>"><?= $post->title ?></a></li>
                 <li class="description"><?= $post->description ?></li>
                 <li class="date"><?= date('Y-m-d', strtotime($post->date)); ?></li>
-                <a class="info" href="moreInfo?about=<?= $post->postId; ?>">+</a>
+                <a id="info">+</a>
             </ul>
         <?php endforeach; ?>
     </section>

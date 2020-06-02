@@ -11,6 +11,12 @@ App::bind('database', new QueryBuilder(
     Connection::make(App::get('config')['database'])
 ));
 
-function dd($expression) {
+function dd($expression = 'empty') {
     die(var_dump($expression));
+}
+
+function views($fileName, $data = [])
+{
+    extract($data);
+    return require "App/views/{$fileName}.view.php";
 }

@@ -39,4 +39,80 @@ class CommentController extends Controller
         );
         $this->redirect('/moreInfo?' . $_GET['params']);
     }
+
+    public function testCreateComment()
+    {
+        if (!empty($_POST['comment'])) {
+            App::get('database')->insert(
+                'comments',
+                [
+                    'userId' => $_SESSION['attributes']['userId'],
+                    'comment' => $_POST['comment'],
+                    'postId' => $_POST['postId']
+                ]
+            );
+        }
+
+        $comments = $this->testGetAllComments($_POST['postId']);
+
+        $userName = [];
+
+        for($index = 0; $index < count($comments); $index++) {
+            array_push($userName, $this->testGetUsername($comments[$index]->userId));
+            $comments[$index]->userId = $userName[$index]['username'];
+        }
+
+        echo json_encode($comments);
+    }
+
+    private function testGetAllComments($postId)
+    {
+        App::get('database')->selectAllWhere(
+            'comments',
+            [
+                'deleted' => 0,
+                'postId' => $postId
+            ]
+        );
+
+        return App::get('database')->fetchAll();
+    }
+
+    public function testGetAllComments2()
+    {
+        App::get('database')->selectAllWhere(
+            'comments',
+            [
+                'deleted' => 0,
+                'postId' => $_GET['postId']
+            ]
+        );
+
+        $comments = App::get('database')->fetchAll();
+
+        $userName = [];
+
+        for($index = 0; $index < count($comments); $index++) {
+            array_push($userName, $this->testGetUsername($comments[$index]->userId));
+            $comments[$index]->userId = $userName[$index]['username'];
+        }
+
+        echo json_encode($comments);
+
+    }
+
+    private function testGetUsername($userId)
+    {
+        App::get('database')->selectWhere(
+            'users',
+            [
+                'username'
+            ],
+            [
+                'userId' => $userId
+            ]
+        );
+
+        return App::get('database')->fetch();
+    }
 }

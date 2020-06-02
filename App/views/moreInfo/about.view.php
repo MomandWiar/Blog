@@ -10,12 +10,12 @@
 
     <section class="post">
         <div class="header-title info">
-            <h1 class="highlight"><?= $data['post']['title'] ?></h1>
-            <h4 class=""><?= $data['post']['description'] ?></h4>
+            <h1 class="highlight"><?= $data['postAttributes']['title'] ?></h1>
+            <h4 class=""><?= $data['postAttributes']['description'] ?></h4>
         </div>
 
         <p class="content">
-            <?= $data['post']['content'] ?>
+            <?= $data['postAttributes']['content'] ?>
         </p>
 
         <div class="info">
@@ -30,10 +30,10 @@
     </div>
 
 <?php if (isset($_SESSION['status']) && $_SESSION['status'] > 0) : ?>
-    <form class='comment_create' action="comment/create-comment" method="post">
-        <textarea name="comment" maxlength="750" placeholder="Max 750 characters" rows="5" cols="50"></textarea>
-        <input name='postId' type="hidden" value="<?= $data['post']['postId'] ?>">
-        <button type="submit">Create a Comment!</button>
+    <form class='comment_create'>
+        <textarea id="postMessage" maxlength="750" placeholder="Max 750 characters" rows="5" cols="50"></textarea>
+        <input id='postId' type="hidden" value="<?= $data['postAttributes']['postId'] ?>">
+        <a id='postComment'>Create a Comment!</a>
     </form>
 <?php else : ?>
     <form class='comment_create' action="/login">
@@ -43,18 +43,9 @@
 <?php endif; ?>
 
     <section class="comment_section">
-        <?php foreach ($data['comments'] as $comment) : ?>
-        <div class="comment">
-            <ul>
-                <p><b><?= $comment->username ?></b></p>
-                <p class="message"> - <?= $comment->comment ?></p>
-                <p><?= $comment->created ?></p>
-                <?php if($comment->userId == $_SESSION['attributes']['userId']) :?>
-                    <a href="comment/delete-comment?where=<?= $comment->commentId; ?>&params=<?= $_SERVER['QUERY_STRING']; ?>">Delete</a>
-                <?php endif; ?>
-            </ul>
+        <div id='newComment' class="comment">
+
         </div>
-        <?php endforeach; ?>
     </section>
 
 <?php include './App/views/partials/footer.php'; ?>

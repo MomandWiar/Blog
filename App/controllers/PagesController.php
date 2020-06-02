@@ -26,9 +26,12 @@ class PagesController extends Controller
         $total_posts_per_page = count(App::get('database')->fetchAll());
 
         $paginate_result = $this->pagination->paginate($total_posts_per_page);
+
+        json_encode($paginate_result);
+
         $css = 'home';
 
-        $this->view('home', compact('paginate_result', 'css', 'js'));
+        $this->view('home', compact('paginate_result', 'css'));
     }
 
     public function getMoreInfoAbout()
@@ -40,7 +43,7 @@ class PagesController extends Controller
             ]
         );
 
-        $post = App::get('database')->fetch();
+        $postAttributes = App::get('database')->fetch();
 
         App::get('database')->selectWhere(
             'users',
@@ -49,27 +52,16 @@ class PagesController extends Controller
                 'created'
             ],
             [
-                'userId' => $post['userId']
+                'userId' => $postAttributes['userId']
             ]
         );
 
         $user = App::get('database')->fetch();
 
-        App::get('database')->createQuery(
-            "SELECT comments.*, users.username
-            FROM comments
-            LEFT JOIN users
-            ON users.userid = comments.userId
-            WHERE comments.deleted = 0 
-            AND comments.postId = {$post['postId']} 
-            ORDER BY comments.created DESC"
-        );
-
-        $comments = App::get('database')->fetchAll();
-
         $css = ['moreInfoAbout', 'form'];
+        $js = 'comments';
 
-        $this->view('moreInfo/about', compact('css', 'post', 'user', 'comments'));
+        $this->view('moreInfo/about', compact('css', 'js', 'postAttributes', 'user'));
     }
 
     public function getAbout()
@@ -106,7 +98,7 @@ class PagesController extends Controller
         $paginate_result = $this->pagination->paginate($total_posts_per_page_by_id, true);
         $css = 'home';
 
-        $this->view('post/posts', compact('paginate_result', 'css', 'page_number', 'number_of_pages'));
+        $this->view('post/posts', compact('paginate_result', 'css'));
     }
 
     public function getCreatePost() {
