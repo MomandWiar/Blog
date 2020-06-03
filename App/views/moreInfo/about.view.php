@@ -49,8 +49,10 @@
                 <p><b><?= $comment->username ?></b></p>
                 <p class="message"> - <?= $comment->comment ?></p>
                 <p><?= $comment->created ?></p>
-                <?php if($comment->userId == $_SESSION['attributes']['userId']) :?>
-                    <a href="comment/delete-comment?where=<?= $comment->commentId; ?>&params=<?= $_SERVER['QUERY_STRING']; ?>">Delete</a>
+                <?php if(isset($_SESSION['attributes']['userId'])) : ?>
+                    <?php if($comment->userId == $_SESSION['attributes']['userId']) :?>
+                        <a href="comment/delete-comment?where=<?= $comment->commentId; ?>&params=<?= $_SERVER['QUERY_STRING']; ?>">Delete</a>
+                    <?php endif; ?>
                 <?php endif; ?>
             </ul>
         </div>
