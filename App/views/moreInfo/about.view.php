@@ -6,7 +6,7 @@
         <h4>We all Trying to Steal some Nice things Sometimes!</h4>
     </div>
 
-    <a href="/">Never mind Go Back!</a>
+    <a href="<?= $_SERVER['HTTP_REFERER'] ?>">Never mind Go Back!</a>
 
     <section class="post">
         <div class="header-title info">
