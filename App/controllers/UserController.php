@@ -2,6 +2,7 @@
 
 namespace Wiar\Controllers;
 use Wiar\Core\App;
+use Wiar\Core\ErrorSuccessController;
 
 class UserController extends Controller
 {
@@ -20,18 +21,19 @@ class UserController extends Controller
             $user = App::get('database')->fetch();
 
             if ($user == true) {
+                $this->assign('success', 'successfully logged in!');
                 $_SESSION['status'] = 1;
                 $_SESSION['attributes'] = $user;
-                $this->redirect('/');
+                $this->redirect('/', 'successfully logged in!', true);
             }
         }
-        $this->redirect('/login');
+        $this->redirect('/login', 'invalid user');
     }
 
     public function logout()
     {
         session_destroy();
-        $this->redirect('/login');
+        $this->redirect('/login', 'User Out!', true);
     }
 
     public function register()

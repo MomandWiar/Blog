@@ -1,8 +1,9 @@
 <?php
 
 namespace Wiar\Controllers;
-use Wiar\Controller\PaginationController;
 use Wiar\Core\App;
+use Wiar\Controllers\PaginationController;
+use Wiar\Controllers\ErrorSuccessController;
 
 class PagesController extends Controller
 {
@@ -25,10 +26,13 @@ class PagesController extends Controller
 
         $total_posts_per_page = count(App::get('database')->fetchAll());
 
-        $paginate_result = $this->pagination->paginate($total_posts_per_page);
-        $css = 'home';
+        $this->assign('css', 'home');
+        $this->assign('paginate_result',
+            $this->pagination->paginate($total_posts_per_page)
+        );
 
-        $this->view('home', compact('paginate_result', 'css', 'js'));
+        $this->view('home');
+        unset($_GET);
     }
 
     public function getMoreInfoAbout()
@@ -40,7 +44,7 @@ class PagesController extends Controller
             ]
         );
 
-        $post = App::get('database')->fetch();
+        $postAttributes = App::get('database')->fetch();
 
         App::get('database')->selectWhere(
             'users',
@@ -49,7 +53,7 @@ class PagesController extends Controller
                 'created'
             ],
             [
-                'userId' => $post['userId']
+                'userId' => $postAttributes['userId']
             ]
         );
 
@@ -61,27 +65,28 @@ class PagesController extends Controller
             LEFT JOIN users
             ON users.userid = comments.userId
             WHERE comments.deleted = 0 
-            AND comments.postId = {$post['postId']} 
+            AND comments.postId = {$postAttributes['postId']} 
             ORDER BY comments.created DESC"
         );
 
-        $comments = App::get('database')->fetchAll();
+        $this->assign('css', ['moreInfoAbout', 'form']);
+        $this->assign('user', $user);
+        $this->assign('postAttributes', $postAttributes);
+        $this->assign('comments', App::get('database')->fetchAll());
 
-        $css = ['moreInfoAbout', 'form'];
-
-        $this->view('moreInfo/about', compact('css', 'post', 'user', 'comments'));
+        $this->view('moreInfo/about');
     }
 
     public function getAbout()
     {
-        $css = 'aboutUs';
-        $this->view('aboutUs', compact('css'));
+        $this->assign('css', 'aboutUs');
+        $this->view('aboutUs');
     }
 
     public function getContact()
     {
-        $css = 'form';
-        $this->view('contact', compact('css'));
+        $this->assign('css', 'form');
+        $this->view('contact');
     }
 
     public function getPosts()
@@ -103,15 +108,17 @@ class PagesController extends Controller
             )
         );
 
-        $paginate_result = $this->pagination->paginate($total_posts_per_page_by_id, true);
-        $css = 'home';
+        $this->assign('css', 'home');
+        $this->assign('paginate_result',
+            $this->pagination->paginate($total_posts_per_page_by_id, true)
+        );
 
-        $this->view('post/posts', compact('paginate_result', 'css', 'page_number', 'number_of_pages'));
+        $this->view('post/posts');
     }
 
     public function getCreatePost() {
-        $css = 'form';
-        $this->view('post/createPost', compact('css'));
+        $this->assign('css', 'form');
+        $this->view('post/createPost');
     }
 
     public function getEditPost() {
@@ -122,28 +129,28 @@ class PagesController extends Controller
             ]
         );
 
-        $post_attributes = App::get('database')->fetch();
-        $css = 'form';
+        $this->assign('css', 'form');
+        $this->assign('post_attributes', App::get('database')->fetch());
 
-        $this->view('post/editPost', compact('css', 'post_attributes'));
+        $this->view('post/editPost');
     }
 
     public function getLogin()
     {
-        $css = 'form';
-        $this->view('user/login', compact('css'));
+        $this->assign('css', 'form');
+        $this->view('user/login');
     }
 
     public function getRegister()
     {
-        $css = 'form';
-        $this->view('user/register', compact('css'));
+        $this->assign('css', 'form');
+        $this->view('user/register');
     }
 
     public function getAccount()
     {
-        $css = 'account';
-        $this->view('user/account/account', compact('css'));
+        $this->assign('css', 'account');
+        $this->view('user/account/account');
     }
 
     public function getAccountProfile()
@@ -158,15 +165,18 @@ class PagesController extends Controller
             ]
         );
 
-        $username = App::get('database')->fetch()['username'];
-        $css = ['account', 'form'];
 
-        $this->view('user/account/accountProfile', compact('css', 'username'));
+        $this->assign('css', ['account', 'form']);
+        $this->assign('username',
+            App::get('database')->fetch()['username']
+        );
+
+        $this->view('user/account/accountProfile');
     }
 
     public function getAccountCustomize()
     {
-        $css = 'account';
-        $this->view('user/account/accountCustomize', compact('css'));
+        $this->assign('css', 'account');
+        $this->view('user/account/accountCustomize');
     }
 }

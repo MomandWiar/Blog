@@ -15,4 +15,22 @@
             <?php endif; ?>
         </ul>
     </nav>
+    <?php if(isset($_GET['error']) && $_GET['error'] !== false) : ?>
+        <div id="message">
+            <div id="error-message" class='message-style'>
+                <div class='message-icon' id='error-icon'><p class='fa fa-times-circle'></p></div>
+                <div class='message-content'><h1><?php echo $_GET['error'] ?></h1></div>
+                <?php unset($_GET['error']) ?>
+            </div>
+        </div>
+    <?php endif; ?>
+    <?php if(isset($_GET['success']) && $_GET['success'] !== false) : ?>
+        <div id="message">
+            <div id="success-message" class='message-style'>
+                <div class='message-icon' id='success-icon'><p class='fa fa-check'></p></div>
+                <div class='message-content'><h1><?php echo $_GET['success'] ?></h1></div>
+                <?php unset($_GET['success']) ?>
+            </div>
+        </div>
+    <?php endif; ?>
 </header>

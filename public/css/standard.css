@@ -63,6 +63,81 @@ header nav ul li {
     margin: 0 20px;
 }
 
+#message {
+    height: 0;
+    visibility: hidden;
+    overflow: hidden;
+    animation-name: messageBackground;
+    animation-duration: 2s;
+}
+
+.message-style {
+    border-radius: 5px;
+    width: 60%;
+    height: 60px;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    box-shadow: 0 5px 5px -5px #808080;
+    animation-name: messageAnimation;
+    animation-duration: 2s;
+}
+
+#error-message {
+    color: #ffffff;
+    background-color: #f67975;;
+    border: 2px solid #ad5855;
+}
+
+#error-icon {
+    border-right: 2px solid #ad5855;
+    color: #ad5855;
+}
+
+#success-message {
+    color: #155c10;
+    background-color: #bbf5bb;
+    border: 2px solid #99c995;
+}
+
+#success-icon {
+    border-right: 2px solid #99c995;
+}
+
+.message-content {
+    width: 90%;
+    text-align: center;
+}
+
+.message-icon {
+    width: 10%;
+    font-size: 37.5px;
+}
+
+.message-content h1 {
+    vertical-align: middle;
+    line-height: 60px;
+    margin: 0;
+}
+
+.message-icon p {
+    margin: 0;
+}
+
+@keyframes messageBackground {
+    0% {height: 0px;}
+    10% {height: 80px;}
+    90% {height: 80px;}
+    100% {height: 0px; visibility: visible;}
+}
+
+@keyframes messageAnimation {
+    0% {margin-top: 100px;}
+    10% {margin-top: 100px;}
+    30% {margin-top: 8px;}
+    100% {margin-top: 8px;}
+}
+
 footer {
 
 }

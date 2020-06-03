@@ -1,6 +1,6 @@
 <?php
 
-namespace Wiar\Controller;
+namespace Wiar\Controllers;
 use Wiar\Core\App;
 
 class PaginationController

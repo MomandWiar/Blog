@@ -10,9 +10,15 @@ use Wiar\Core\App;
  */
 class Controller
 {
+    private $data = [];
+
     public function __construct()
     {
         session_start();
+    }
+
+    public function assign($variable, $value) {
+        $this->data[$variable] = $value;
     }
 
     /**
@@ -21,8 +27,9 @@ class Controller
      * @param String $name
      * @return void
      */
-    public function view($fileName, $data = [])
+    public function view($fileName)
     {
+        $data = $this->data;
         extract($data);
         return require "App/views/{$fileName}.view.php";
     }
@@ -32,8 +39,16 @@ class Controller
      *
      * @param String $path
      */
-    public function redirect($path)
+    public function redirect($path, $message = false, $type = false)
     {
+        if ($message == true) {
+            if ($type == true) {
+                header("Location: {$path}?success=" . $message);
+                exit();
+            }
+            header("Location: {$path}?error=" . $message);
+            exit();
+        }
         header("Location: {$path}");
         exit();
     }

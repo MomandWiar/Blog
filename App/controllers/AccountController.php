@@ -31,7 +31,7 @@ class AccountController extends Controller
                         ]
                     );
                 }
-                $this->redirect('/account/profile');
+                $this->redirect('/account/profile', 'Account has been Updated!', true);
             } else {
                 App::get('database')->update(
                     'users',
@@ -46,6 +46,6 @@ class AccountController extends Controller
                 $this->redirect('/logout-user');
             }
         }
-        $this->redirect('/account');
+        $this->redirect('/account', 'Something went Wrong');
     }
 }

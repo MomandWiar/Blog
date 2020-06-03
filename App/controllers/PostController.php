@@ -1,7 +1,7 @@
 <?php
 
 namespace Wiar\Controllers;
-
+use Wiar\Controllers;
 use Wiar\Core\App;
 /**
  * Class Controller
@@ -22,9 +22,9 @@ class PostController extends Controller
                     'userId' => $_SESSION['attributes']['userId']
                 ]
             );
-            $this->redirect('/post');
+            $this->redirect('/post', 'Successfully created a new post', true);
         }
-        $this->redirect('/post/create-post');
+        $this->redirect('/post/create-post', 'Something went Wrong..');
     }
 
     public function updatePost()
@@ -44,7 +44,7 @@ class PostController extends Controller
                         'userId' => $_SESSION['attributes']['userId']
                     ]
                 );
-                $this->redirect('/post');
+                $this->redirect('/post', 'Post had been updated!', true);
             } else if ($_POST['action'] == 'delete') {
                 App::get('database')->update(
                     'posts',
@@ -56,9 +56,9 @@ class PostController extends Controller
                         'userId' => $_SESSION['attributes']['userId']
                     ]
                 );
-                $this->redirect('/post');
+                $this->redirect('/post', 'Post has been Deleted!');
             }
-            $this->redirect('/post/edit-post');
         }
+        $this->redirect('/post/edit-post', 'Something went Wrong..');
     }
 }
