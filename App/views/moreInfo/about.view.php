@@ -20,7 +20,7 @@
 
         <div class="info">
             <p>Created by <b><?= $data['user']['username'] ?></b></p>
-            <p>On <?= $data['user']['created'] ?></p>
+            <p>On <?= $data['postAttributes']['date'] ?></p>
         </div>
     </section>
 
