@@ -10,9 +10,13 @@ use Wiar\Core\App;
  */
 class CommentController extends Controller
 {
+    /**
+     * creates a new comment by post data
+     */
     public function createComment()
     {
         if (!empty($_POST['comment'])) {
+            # creates a new comment
             App::get('database')->insert(
                 'comments',
                 [
@@ -28,6 +32,7 @@ class CommentController extends Controller
 
     public function deleteComment()
     {
+        # deletes a comment
         App::get('database')->update(
             'comments',
             [

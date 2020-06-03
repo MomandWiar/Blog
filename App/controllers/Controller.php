@@ -17,6 +17,12 @@ class Controller
         session_start();
     }
 
+    /**
+     * assigns a variable to a associative array
+     *
+     * @param String $variable
+     * @param String $value
+     */
     public function assign($variable, $value) {
         $this->data[$variable] = $value;
     }

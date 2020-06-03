@@ -3,13 +3,22 @@
 namespace Wiar\Controllers;
 use Wiar\Core\App;
 
+/**
+ * Class AccountController
+ *
+ * handles all the Account information
+ */
 class AccountController extends Controller
 {
+    /**
+     * updates profile by post data
+     */
     public function updateProfile()
     {
         if (!empty($_POST['username'])) {
             if ($_POST['action'] == 'update') {
                 if (!empty($_POST['password'])) {
+                    # updates username and password
                     App::get('database')->update(
                         'users',
                         [
@@ -21,6 +30,7 @@ class AccountController extends Controller
                         ]
                     );
                 } else {
+                    # updates username
                     App::get('database')->update(
                         'users',
                         [
@@ -33,6 +43,7 @@ class AccountController extends Controller
                 }
                 $this->redirect('/account/profile', 'Account has been Updated!', true);
             } else {
+                # soft deletes user
                 App::get('database')->update(
                     'users',
                     [

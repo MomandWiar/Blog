@@ -1,15 +1,18 @@
 <?php
 
 namespace Wiar\Controllers;
-use Wiar\Controllers;
+use Wiar\Controllers\Controller;
 use Wiar\Core\App;
 /**
  * Class Controller
  *
- * contains all helpers functions
+ * handles all the post information
  */
 class PostController extends Controller
 {
+    /**
+     * saves the post
+     */
     public function savePost()
     {
         if (!empty($_POST['title']) && !empty($_POST['description']) && !empty($_POST['content'])) {
@@ -27,10 +30,14 @@ class PostController extends Controller
         $this->redirect('/post/create-post', 'Something went Wrong..');
     }
 
+    /**
+     * updates the post
+     */
     public function updatePost()
     {
         if (!empty($_POST['title']) && !empty($_POST['description']) && !empty($_POST['content'])) {
             if ($_POST['action'] == 'update') {
+                # updates the post
                 App::get('database')->update(
                     'posts',
                     [
@@ -46,6 +53,7 @@ class PostController extends Controller
                 );
                 $this->redirect('/post', 'Post had been updated!', true);
             } else if ($_POST['action'] == 'delete') {
+                # deletes the post
                 App::get('database')->update(
                     'posts',
                     [
